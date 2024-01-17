@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "../components/Button";
 
 const Home = () => {
   const [bgColor, setBgColor] = useState("bg-zinc-800");

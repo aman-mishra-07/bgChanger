@@ -1,15 +1,19 @@
-import React , { useState } from 'react'
-import PasswordGenerator from './pages/PasswordGenerator'
-import Home from './pages/Home'
+import React, { useEffect, useReducer } from "react";
+import Todos from "./components/Todos";
+import { todosReducer } from "./reducers/todosReducer";
+import { TodoContext } from "./contexts/TodoContext";
 
 function App() {
+  const [todos, dispatch] = useReducer(todosReducer, []);
+
   return (
     <>
-    <Home/>
-    <PasswordGenerator />
+      <TodoContext.Provider value={{todos, dispatch}}>
+        <Todos />
+      </TodoContext.Provider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
 
