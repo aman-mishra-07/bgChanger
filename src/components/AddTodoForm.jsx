@@ -25,6 +25,7 @@ const AddTodoForm = () => {
           placeholder="Add New task"
           value={task}
           onChange={(e) => setTask(e.target.value)}
+          className='flex-1'
         />
         <Button type="submit">Add Task</Button>
       </form>

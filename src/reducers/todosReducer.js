@@ -22,6 +22,8 @@ export const todosReducer = (todos, action) => {
                     return todo;
                 }
             })
+        case 'delete':
+            return todos.filter(todo => action.id !== todo.id);
         case 'DirectToRigth':
             return todos.map((todo) => {
                 if (todo.completed && action.direction === 'left') {

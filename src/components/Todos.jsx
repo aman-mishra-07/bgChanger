@@ -2,66 +2,45 @@ import React, { useContext } from "react";
 import { TodoContext } from "../contexts/TodoContext";
 import AddTodoForm from "./AddTodoForm";
 import TodoContainor from "../components/TodoContainor";
-import TodoItem from "./TodoItem";
 import Button from "./Button";
-import { FaArrowLeft } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaArrowDown,
+  FaArrowRight,
+  FaArrowUp,
+} from "react-icons/fa";
 
 const Todos = () => {
-  const { todos, dispatch } = useContext(TodoContext);
+  const { dispatch } = useContext(TodoContext);
   const handleLeftBox = () => {
     dispatch({
       type: "DirectToLeft",
-      direction: 'right',
+      direction: "right",
     });
   };
   const handleRightBox = () => {
     dispatch({
       type: "DirectToRigth",
-      direction : 'left',
+      direction: "left",
     });
   };
   return (
     <div className="w-full min-h-screen bg-zinc-700 text-zinc-100 p-4 sm:px-20 sm:py-10 space-y-4">
       <h1 className="text-3xl font-bold">Todos</h1>
       <AddTodoForm />
-      <div className="flex justify-between gap-2">
-        <TodoContainor heading="Incomplete tasks">
-          <ul className="space-y-1">
-            {todos &&
-              todos.map((task) => {
-                return (
-                  task.direction === "left" && (
-                    <li key={task.id}>
-                      <TodoItem task={task} />
-                    </li>
-                  )
-                );
-              })}
-          </ul>
-        </TodoContainor>
-        <div className="space-y-2">
+      <div className="flex flex-col sm:flex-row justify-between gap-2">
+        <TodoContainor heading="Incomplete tasks" direction="left" />
+        <div className="space-x-4 sm:space-x-0 sm:space-y-2  text-center">
           <Button type="button" onClick={handleLeftBox}>
-            <FaArrowLeft />
+            <FaArrowLeft className="hidden sm:block" />
+            <FaArrowUp className="sm:hidden" />
           </Button>
           <Button type="button" onClick={handleRightBox}>
-            <FaArrowRight />
+            <FaArrowRight className="hidden sm:block" />
+            <FaArrowDown className="sm:hidden" />
           </Button>
         </div>
-        <TodoContainor heading="Completed tasks">
-          <ul className="space-y-1">
-            {todos &&
-              todos.map((task) => {
-                return (
-                  task.direction === "right" && (
-                    <li key={task.id}>
-                      <TodoItem task={task} />
-                    </li>
-                  )
-                );
-              })}
-          </ul>
-        </TodoContainor>
+        <TodoContainor heading="Completed tasks" direction="right" />
       </div>
     </div>
   );
